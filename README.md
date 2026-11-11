@@ -68,8 +68,10 @@ To remove the sponsor, delete the `TAG` variable in Railway and redeploy.
 - `mtg` v2 removed adtag support entirely, so the sponsored channel
   would stop working; its author recommends Telemt for adtag use.
 - Telemt supports FakeTLS (`tls = true`) and `ad_tag`, and is actively
-  maintained. `use_middle_proxy = true` is set because the middle proxy
-  is required for promotion tags and for media on non-Premium accounts.
+  maintained. `use_middle_proxy` is on only when a `TAG` is set: the
+  sponsored channel only works through Telegram's middle proxies, which
+  add an extra hop and make media/uploads slower, so with no tag the
+  proxy connects directly to the DCs (faster, more reliable).
 
 ## Notes
 

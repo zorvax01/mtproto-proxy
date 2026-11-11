@@ -12,7 +12,15 @@ mkdir -p /app/tlsfront
 
 {
   echo "[general]"
-  echo "use_middle_proxy = true"
+  # Middle proxy is REQUIRED for the sponsored channel (ad_tag), but it adds
+  # an extra hop through Telegram's intermediate servers and makes media
+  # much slower. With no TAG set, go direct to the DCs (faster, more
+  # reliable). When TAG is set later, middle proxy turns on automatically.
+  if [ -n "${TAG:-}" ]; then
+    echo "use_middle_proxy = true"
+  else
+    echo "use_middle_proxy = false"
+  fi
   if [ -n "${TAG:-}" ]; then
     echo "ad_tag = \"$TAG\""
   fi
